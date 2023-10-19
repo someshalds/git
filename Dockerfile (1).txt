@@ -1,6 +1,11 @@
-# Pull base image
-From tomcat:8-jre8
-# Maintainer
-MAINTAINER "valaxytech@gmail.com"
-COPY webapp.war /usr/local/tomcat/webapps/
-
+FROM ubuntu
+RUN apt get update
+RUN apt get install unzip
+RUN apt get install zip
+ADD wge thttps://www.free-css.com/assets/files/free-css-templates/download/page254/photogenic.zip /var/www/html/
+WORKDIR /var/www/html/
+RUN unzip photogenic.zip
+RUN cp -rvf photogenic/* .
+RUN rm -rf photogenic photogenic.zip
+CMD ["/usr/sbin/httpd", "-D","FOREGROUND"]
+EXPOSE 80
